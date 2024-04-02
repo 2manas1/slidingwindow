@@ -1,0 +1,32 @@
+public class SlidingWindow {
+    // Function to find the maximum sum of 'k' consecutive elements in an array
+    public static int maxSum(int[] arr, int k) {
+        int n = arr.length;
+        if (n < k) {
+            System.out.println("Invalid input");
+            return -1;
+        }
+
+        // Compute sum of first window of size k
+        int sum = 0;
+        for (int i = 0; i < k; i++)
+            sum += arr[i];
+
+        // Initialize maximum sum
+        int max_sum = sum;
+
+        // Compute sums of remaining windows by removing first element of previous window and adding last element of current window
+        for (int i = k; i < n; i++) {
+            sum = sum - arr[i - k] + arr[i];
+            max_sum = Math.max(max_sum, sum);
+        }
+
+        return max_sum;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {4, 2, 1, 7, 8, 1, 2, 8, 1, 0};
+        int k = 3;
+        System.out.println("Maximum sum of subarray of size " + k + ": " + maxSum(arr, k));
+    }
+}
