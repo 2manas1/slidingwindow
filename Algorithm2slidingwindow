@@ -1,0 +1,29 @@
+mport java.io.*; 
+public class Solution {
+    public static int findAllSubarraysWithGivenSum(int arr[], int s) {
+        // Write your code here.    
+   int start = 0;
+        int end = 0;
+        int sum = 0;
+        int cc = 0;
+
+        while (end < arr.length) {
+            sum += arr[end];
+// if sum>s, move the start pointer
+            while (start <= end && sum > s) {
+                sum -= arr[start];
+                start++;
+            }
+// condition where we get out sum==s, so we move our start pointer
+            if (sum == s) {
+                cc++;
+                sum -= arr[start];
+                start++;
+            }
+
+            end++;
+        }
+
+        return cc;
+    }
+}
